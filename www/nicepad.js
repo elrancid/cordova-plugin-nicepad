@@ -19,14 +19,14 @@
  *
 */
 
-var argscheck = require('cordova/argscheck'),
-    channel = require('cordova/channel'),
-    utils = require('cordova/utils'),
-    exec = require('cordova/exec');
+var argscheck = require('cordova/argscheck');
+//var channel = require('cordova/channel');
+var utils = require('cordova/utils');
+var exec = require('cordova/exec');
 
-channel.createSticky('onCordovaInfoReady');
+//channel.createSticky('onCordovaInfoReady');
 // Tell cordova channel to wait on the CordovaInfoReady event
-channel.waitForInitialization('onCordovaInfoReady');
+//channel.waitForInitialization('onCordovaInfoReady');
 
 /**
  * This represents the mobile device, and provides properties for inspecting the model, version, UUID of the
@@ -34,19 +34,21 @@ channel.waitForInitialization('onCordovaInfoReady');
  * @constructor
  */
 function NicePad() {
-    this.available = false;
+/*
+	this.available = false;
 
-    var me = this;
+	var me = this;
 
-    channel.onCordovaReady.subscribe(function() {
-        me.getInfo(function(info) {
-            me.available = true;
-            channel.onCordovaInfoReady.fire();
-        },function(e) {
-            me.available = false;
-            utils.alert("[ERROR] Error initializing Cordova: " + e);
-        });
-    });
+	channel.onCordovaReady.subscribe(function() {
+		me.getInfo(function(info) {
+			me.available = true;
+			channel.onCordovaInfoReady.fire();
+		},function(e) {
+			me.available = false;
+			utils.alert("[ERROR] Error initializing Cordova: " + e);
+		});
+	});
+*/
 }
 
 /**
@@ -55,9 +57,25 @@ function NicePad() {
  * @param {Function} successCallback The function to call when the heading data is available
  * @param {Function} errorCallback The function to call when there is an error getting the heading data. (OPTIONAL)
  */
-NicePad.prototype.echo = function(successCallback, errorCallback) {
-    argscheck.checkArgs('fF', 'NicePad.echo', arguments);
-    exec(successCallback, errorCallback, "NicePad", "echo", []);
+NicePad.prototype.echo = function(successCallback, errorCallback, message) {
+//	argscheck.checkArgs('fF', 'NicePad.echo', arguments);
+	exec(successCallback, errorCallback, "NicePad", "echo", [message]);
 };
 
 module.exports = new NicePad();
+
+module.exports = {
+	/**
+	 * Send a message.
+	 *
+	 * @param {String} message	   The message to send.
+	 */
+	echoTest: function(message) {
+		exec(null, null, "NicePad", "echo", [message]);
+	},
+/*
+	echoTest2: function(message) {
+		exec(function(message){alert("message");}, null, "NicePad", "echo", [message]);
+	},
+*/
+};

@@ -19,63 +19,37 @@
  *
 */
 
-var argscheck = require('cordova/argscheck');
-//var channel = require('cordova/channel');
-var utils = require('cordova/utils');
+//var utils = require('cordova/utils');
 var exec = require('cordova/exec');
 
-//channel.createSticky('onCordovaInfoReady');
-// Tell cordova channel to wait on the CordovaInfoReady event
-//channel.waitForInitialization('onCordovaInfoReady');
-
 /**
- * This represents the mobile device, and provides properties for inspecting the model, version, UUID of the
- * phone, etc.
+ * This represents the NicePad class with all methods to implements
+ * 
+ * How to use:
+ * nicepad.echo(send message: "+message);
+ * nicepad.echo(
+ * 	function(msg) {
+ * 	 // return msg
+ *  },
+ *  function(err) {
+ * 	 // return err
+ *  },
+ *  "message to echo"
+ * );
+ * 
  * @constructor
  */
-function NicePad() {
-/*
-	this.available = false;
-
-	var me = this;
-
-	channel.onCordovaReady.subscribe(function() {
-		me.getInfo(function(info) {
-			me.available = true;
-			channel.onCordovaInfoReady.fire();
-		},function(e) {
-			me.available = false;
-			utils.alert("[ERROR] Error initializing Cordova: " + e);
-		});
-	});
-*/
-}
+function NicePad() {}
 
 /**
- * Get device info
+ * Echo a message
  *
- * @param {Function} successCallback The function to call when the heading data is available
- * @param {Function} errorCallback The function to call when there is an error getting the heading data. (OPTIONAL)
+ * @param {Function} successCallback The function to call when the echo message is available
+ * @param {Function} errorCallback The function to call when there is an error getting the echo message
+ * @param {String} message The message to send.
  */
 NicePad.prototype.echo = function(successCallback, errorCallback, message) {
-//	argscheck.checkArgs('fF', 'NicePad.echo', arguments);
 	exec(successCallback, errorCallback, "NicePad", "echo", [message]);
 };
 
 module.exports = new NicePad();
-
-module.exports = {
-	/**
-	 * Send a message.
-	 *
-	 * @param {String} message	   The message to send.
-	 */
-	echoTest: function(message) {
-		exec(null, null, "NicePad", "echo", [message]);
-	},
-/*
-	echoTest2: function(message) {
-		exec(function(message){alert("message");}, null, "NicePad", "echo", [message]);
-	},
-*/
-};

@@ -1,7 +1,7 @@
 *.csproj.user
 *.suo
 *.cache
-Thumbs.db
+*Thumbs.db
 *.DS_Store
 *.bak
 *.cache

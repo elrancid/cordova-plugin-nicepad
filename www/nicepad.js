@@ -41,22 +41,46 @@ var exec = require('cordova/exec');
  */
 function NicePad() {}
 
+/*
+NicePad.prototype.EVENT_CONNECT = 1;
+NicePad.prototype.EVENT_DISCONNECT = 2;
+NicePad.prototype.EVENT_NETWORK_TIMEOUT = 3;
+NicePad.prototype.EVENT_NETWORK_ERROR = 4;
+NicePad.prototype.EVENT_RECEIVE = 5;
+
+NicePad.prototype.setEventCallback = function(eventCallback) {
+	NicePad.prototype.callback = eventCallback;
+};
+*/
+
 /**
- * Echo a message
+ * Listen for connections events in "automatic" mode.
  *
- * @param {Function} successCallback The function to call when the echo message is available.
- * @param {Function} errorCallback The function to call when there is an error getting the echo message.
- * @param {String} message The message to send.
+ * @param {Function} successCallback The function to call when there is an event connecting to TCP.
+ * @param {Function} errorCallback The function to call when there is an event disconnecting to TCP.
  */
-NicePad.prototype.echo = function(successCallback, errorCallback, message) {
-	exec(successCallback, errorCallback, "NicePad", "echo", [message]);
+NicePad.prototype.connectionEvents = function(successCallback, errorCallback) {
+	exec(successCallback, errorCallback, "NicePad", "connectionEvents", []);
 };
 
 /**
- * Exit from webapp and return to notive app.
+ * Connect to TCP connection in "managed" mode.
+ *
+ * @param {Function} successCallback The function to call when connected to TCP connection.
+ * @param {Function} errorCallback The function to call when there is an error connecting to TCP connection.
  */
-NicePad.prototype.quit = function() {
-	exec(null, null, "NicePad", "quit", []);
+NicePad.prototype.connect = function(successCallback, errorCallback) {
+	exec(successCallback, errorCallback, "NicePad", "connect", []);
+};
+
+/**
+ * Disconnect from TCP connection in "managed" mode.
+ *
+ * @param {Function} successCallback The function to call when disconnected from TCP connection.
+ * @param {Function} errorCallback The function to call when there is an error disconnecting from TCP connection.
+ */
+NicePad.prototype.disconnect = function(successCallback, errorCallback) {
+	exec(successCallback, errorCallback, "NicePad", "disconnect", []);
 };
 
 /**
@@ -67,6 +91,7 @@ NicePad.prototype.quit = function() {
  * @param {String} message The message to send.
  */
 NicePad.prototype.send = function(successCallback, errorCallback, message) {
+	console.log('nicepad.js: send message with exec: '+message);
 	exec(successCallback, errorCallback, "NicePad", "send", [message]);
 };
 
@@ -78,6 +103,13 @@ NicePad.prototype.send = function(successCallback, errorCallback, message) {
  */
 NicePad.prototype.receive = function(successCallback, errorCallback) {
 	exec(successCallback, errorCallback, "NicePad", "receive", []);
+};
+
+/**
+ * Exit from webapp and return to notive app.
+ */
+NicePad.prototype.exit = function() {
+	exec(null, null, "NicePad", "exit", []);
 };
 
 module.exports = new NicePad();

@@ -3,7 +3,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="it.nicefall.cordova.nicepad"
+    id="com.nicefall.cordova.nicepad"
     version="0.0.1">
     <name>NicePad</name>
     <description>Cordova NicePad Plugin</description>
@@ -21,11 +21,11 @@
     <platform name="android">
         <config-file target="res/xml/nicepad.xml" parent="/*">
             <feature name="NicePad" >
-                <param name="android-package" value="it.nicefall.cordova.nicepad.NicePad"/>
+                <param name="android-package" value="com.nicefall.cordova.nicepad.NicePad"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/NicePad.java" target-dir="src/it/nicefall/cordova/nicepad" />
+        <source-file src="src/android/NicePad.java" target-dir="src/com/nicefall/cordova/nicepad" />
     </platform>
 
     <!-- ios -->

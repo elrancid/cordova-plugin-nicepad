@@ -1,3 +1,4 @@
+cordova.define("com.nicefall.cordova.nicepad.nicepad", function(require, exports, module) {
 /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -91,7 +92,6 @@ NicePad.prototype.disconnect = function(successCallback, errorCallback) {
  * @param {String} message The message to send.
  */
 NicePad.prototype.send = function(successCallback, errorCallback, message) {
-	console.log('nicepad.js: send message with exec: '+message);
 	exec(successCallback, errorCallback, "NicePad", "send", [message]);
 };
 
@@ -113,3 +113,4 @@ NicePad.prototype.exit = function() {
 };
 
 module.exports = new NicePad();
+});

@@ -1,6 +1,6 @@
-package it.nicefall.cordova.nicepad;
+package com.nicefall.cordova.nicepad;
 
-import it.nicefall.NicePad.App;
+import com.nicefall.NicePad.App;
 
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
@@ -36,9 +36,9 @@ public class NicePad extends CordovaPlugin {
 	 * Executes the request and returns PluginResult.
 	 *
 	 * @param action			The action to execute.
-	 * @param args			  JSONArry of arguments for the plugin.
-	 * @param callbackContext   The callback id used when calling back into JavaScript.
-	 * @return				  True if the action was valid, false if not.
+	 * @param args				JSONArry of arguments for the plugin.
+	 * @param callbackContext	The callback id used when calling back into JavaScript.
+	 * @return					True if the action was valid, false if not.
 	 */
 	public boolean execute( final String action, final JSONArray args, final CallbackContext callbackContext ) throws JSONException {
 		android.util.Log.d( "[DEBUG]", "NicePad::execute(): " + action + " # " + args.toString() );	// TODO - remove
